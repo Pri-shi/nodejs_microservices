@@ -7,16 +7,12 @@ services:
     container_name: nosql-db
     volumes:
       - ./db/:/data/db
-      - /var/run/docker.sock:/var/run/docker.sock
-
 
   rabbitmq:
     image: rabbitmq:alpine
     container_name: rabbitmq
     ports:
       - '5672:5672'
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
   products:
     build:
@@ -32,10 +28,9 @@ services:
     volumes:
       - .:/app
       - /app/products/node_modules
-      - /var/run/docker.sock:/var/run/docker.sock
+
     env_file:
       - ./products/.env.dev
-
   shopping:
     build:
       dockerfile: Dockerfile
@@ -50,10 +45,8 @@ services:
     volumes:
       - .:/app
       - /app/shopping/node_modules
-      - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./shopping/.env.dev
-
   customer:
     build:
       dockerfile: Dockerfile
@@ -68,11 +61,8 @@ services:
     volumes:
       - .:/app/
       - /app/customer/node_modules
-      - /var/run/docker.sock:/var/run/docker.sock
-
     env_file:
       - ./customer/.env.dev
-
   nginx-proxy:
     build:
       dockerfile: Dockerfile
@@ -83,5 +73,3 @@ services:
       - customer
     ports:
       - 80:80
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
