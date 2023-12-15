@@ -43,6 +43,7 @@ services:
     restart: always
     depends_on:
       - "nosql-db"
+      - "nosql-mongodb"
       - "rabbitmq"
     volumes:
       - .:/app
@@ -61,6 +62,7 @@ services:
     restart: always
     depends_on:
       - "nosql-db"
+      - "nosql-mongodb"
       - "rabbitmq"
     volumes:
       - .:/app
@@ -79,6 +81,7 @@ services:
     restart: always
     depends_on:
       - "nosql-db"
+      - "nosql-mongodb"
       - "rabbitmq"
     volumes:
       - .:/app/
