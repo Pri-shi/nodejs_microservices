@@ -1,19 +1,5 @@
 version: "3"
 services:
-
-  nosql-mongodb:
-    build:
-      dockerfile: Dockerfile.mongodb
-      context: ./mongodb
-    container_name: nosql-mongodb
-    ports: 
-      - "27019:27017"
-    privileged: true
-    command: /lib/systemd/systemd
-    volumes:
-      - ./db/:/data/db
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-
   nosql-db:
     image: mvertes/alpine-mongo
     ports:
@@ -29,7 +15,6 @@ services:
     container_name: rabbitmq
     ports:
       - '5672:5672'
-      - '15672:15672'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
