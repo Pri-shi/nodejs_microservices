@@ -3,7 +3,7 @@ services:
 
   nosql-mongodb:
     build:
-      dockerfile: Dockerfile.mongodb
+      dockerfile: Dockerfile
       context: ./mongodb
     container_name: nosql-mongodb
     ports: 
