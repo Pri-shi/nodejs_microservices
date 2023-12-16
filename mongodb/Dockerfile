@@ -8,4 +8,4 @@ RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mo
 RUN apt-get update
 RUN apt-get install mongodb-org -y
 #RUN systemctl start mongod.service
-CMD ["/bin/bash"]
+CMD ["echo started"]
