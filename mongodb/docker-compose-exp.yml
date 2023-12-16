@@ -1,26 +1,27 @@
 version: "3"
 services:
 
-  nosql-mongodb:
-    build:
-      dockerfile: Dockerfile
-      context: ./mongodb
-    container_name: nosql-mongodb
-    ports: 
-      - "27018:27017"
-    privileged: true
-    volumes:
-      - ./db/:/data/db
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-
-  # nosql-db:
-  #   image: mvertes/alpine-mongo
-  #   ports:
+  # nosql-mongodb:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./mongodb
+  #   container_name: nosql-mongodb
+  #   ports: 
   #     - "27018:27017"
-  #   container_name: nosql-db
+  #   privileged: true
+  #   command: /lib/systemd/systemd
   #   volumes:
   #     - ./db/:/data/db
-  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  nosql-db:
+    image: mvertes/alpine-mongo
+    ports:
+      - "27018:27017"
+    container_name: nosql-db
+    volumes:
+      - ./db/:/data/db
+      - /var/run/docker.sock:/var/run/docker.sock
 
 
   rabbitmq:
@@ -41,8 +42,8 @@ services:
       - "8002:8002"
     restart: always
     depends_on:
-      #- "nosql-db"
-      - "nosql-mongodb"
+      - "nosql-db"
+      #- "nosql-mongodb"
       - "rabbitmq"
     volumes:
       - .:/app
@@ -60,8 +61,8 @@ services:
       - "8003:8003"
     restart: always
     depends_on:
-      #- "nosql-db"
-      - "nosql-mongodb"
+      - "nosql-db"
+      # - "nosql-mongodb"
       - "rabbitmq"
     volumes:
       - .:/app
@@ -79,8 +80,8 @@ services:
       - "8001:8001"
     restart: always
     depends_on:
-      #- "nosql-db"
-      - "nosql-mongodb"
+      - "nosql-db"
+      # - "nosql-mongodb"
       - "rabbitmq"
     volumes:
       - .:/app/
